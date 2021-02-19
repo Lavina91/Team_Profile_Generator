@@ -205,8 +205,8 @@ function makeTeam(){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <link rel="stylesheet" href="../Team_Profile_Generator/style.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <title>Team Generator</title>
 </head>
 <body id="body">
 
@@ -279,32 +279,6 @@ function makeTeam(){
     fs.writeFile('teamProfile.html', totalHTML.join(''), (err) => 
     err ? console.log(err) : console.log('success!'))
 
-
-    // fs.writeFile('log.txt', process.argv[2], (err) =>
-//   err ? console.error(err) : console.log('Success!')
-// );
-
-
-
-
-    // create a for loop that loops through the length of teamMembers to add card bodys depending on roles
-        // create a variable to store middle HTML layout 
-
-        // IF role = Manager 
-        // ADD office number
-
-        // IF role = Engineer 
-        // ADD github username
-
-        //IF role = Intern 
-         // ADD school name 
-
-        // push middle HTML variable to total HTML array
-
-    // create an ending HTML variable that has ending HTML layout
-        // push to total HTML array 
-        
-    // call fs.writefile to create HTML file for the team
 }
 
 
