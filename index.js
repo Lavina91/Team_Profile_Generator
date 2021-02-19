@@ -48,7 +48,7 @@ function startQuestions() {
 
         teamMembers.push(managerMember)
 
-        // chooseTeamMember();
+        chooseTeamMember();
 
 
     });
@@ -87,8 +87,7 @@ function chooseTeamMember(){
         }
     })
 
-}
-
+} // WORKS !!!!!!!!
 
 
 
@@ -115,22 +114,28 @@ function addEngineer(){
             name: 'engineerGitHub'
         },
         {
-            type: 'list',
-            message: 'What type of role would you like to add ?',
-            choices: ['Engineer', 'Intern', 'I do not want add any more team members'],
-            name: 'roles'
+            type: 'input',
+            message: 'What is your GitHub username ?',
+            name: 'engineerGitHub'
         }
     ]
 
-// inquirer prompt the Engineer questions
+    inquirer.prompt(engineerQuestions)
+    
+    .then((answer) => {
 
-// .then save the data using
-// const name = this.name
+        const name = answer.engineerName;
+        const id = answer.engineerId;
+        const email = answer.engineerEmail;
+        const github = answer.engineerGitHub;
 
-// then push new Engineer object to let teamMembers
+        const engineerMember = new Engineer(name, id, email, github);
 
+        teamMembers.push(engineerMember);
 
-};
+        chooseTeamMember();
+    });
+}; // WORKS !!!!!!!!
 
 
 
@@ -150,29 +155,34 @@ function addIntern(){
         {
             type: 'input',
             message: "What is the intern's email ?",
-            name: 'managerEmail'
+            name: 'internEmail'
         },
         {
             type: 'input',
             message: "What is the name of your intern's school ?",
             name: 'internSchool'
-        },
-        {
-            type: 'list',
-            message: 'What type of role would you like to add ?',
-            choices: ['Engineer', 'Intern', 'I do not want add any more team members'],
-            name: 'roles'
         }
     ]
 
-// inquirer prompt the Intern questions
+    inquirer.prompt(internQuestions)
 
-// .then save the data using
-// const name = this.name
+    .then((answer) => {
 
-// then push new Intern object to let teamMembers
+        const name = answer.internName;
+        const id = answer.internId;
+        const email = answer.internEmail
+        const school = answer.internSchool;
 
-};
+        const internMember = new Intern(name, id, email, school);
+
+        teamMembers.push(internMember);
+        console.log(teamMembers);
+        chooseTeamMember();
+    });
+
+
+}; // WORKS !!!!!!!!!!!!!1
+
 
 
 
