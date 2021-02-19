@@ -51,33 +51,41 @@ function startQuestions() {
         // chooseTeamMember();
 
 
-    })
+    });
 
 
 
-}; 
+}; // WORKS !!!!
 
-startQuestions();
 
-// {
-//     type: 'list',
-//         message: 'What type of role would you like to add ?',
-//             choices: ['Engineer', 'Intern', 'I do not want add any more team members'],
-//                 name: 'roles'
-// }
 
 function chooseTeamMember(){
 
-    // make a switch statement 
+    inquirer.prompt([
+        {
+            type: 'list',
+            message: 'What type of role would you like to add ?',
+            choices: ['Engineer', 'Intern', 'I do not want add any more team members'],
+            name: 'roles'
+        }   
+    ])
+    .then((answer) => {
 
-// IF user wants to add an Intern 
-//call makeIntern function that ask intern questions
+        switch(answer.roles) {
 
-//ELSE  user wants to add an Engineer 
-// call makeEngineer function that ask engineer questions 
+            case 'Engineer':
+                addEngineer();
+                break;
 
-// ELSE user is done making their team 
-// call makeTeam function that add html file with all the answers from user 
+            case 'Intern':
+                addIntern();
+                break;
+
+            case 'I do not want add any more team members':
+                makeTeam();
+                break;
+        }
+    })
 
 }
 
