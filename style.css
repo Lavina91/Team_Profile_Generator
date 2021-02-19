@@ -1,0 +1,24 @@
+#body {
+    background-image: url(https://cdn.pixabay.com/photo/2015/07/31/20/38/background-869586_1280.png);
+}
+
+#navBar {
+    background-color: dimgray;
+    margin-bottom: 10%;
+}
+
+#sticky-top {
+    margin-left: 40%;
+    font-size: 50px;
+    color: white;
+}
+
+#card-body {
+    background-color: grey;
+    border-style: solid;
+    margin: 10px;
+}
+
+a {
+    color: white;
+}

@@ -11,7 +11,7 @@ let teamMembers = [];
 
 
 
-function startQuestions() {
+function startQuestion() {
     const startQuestions = [
         {
             type: 'input',
@@ -35,6 +35,7 @@ function startQuestions() {
         }
     ]
 
+
     inquirer.prompt(startQuestions)
 // inquirer prompt the startQuestions
     .then((answer) => {
@@ -43,10 +44,11 @@ function startQuestions() {
         const id = answer.managerId;
         const email = answer.managerEmail;
         const officeNum = answer.managerOffice
+     
 
-        const managerMember = new Manager (name, id, email, officeNum);
+        const teamMember = new Manager (name, id, email, officeNum);
 
-        teamMembers.push(managerMember)
+        teamMembers.push(teamMember)
 
         chooseTeamMember();
 
@@ -118,20 +120,19 @@ function addEngineer(){
             message: 'What is your GitHub username ?',
             name: 'engineerGitHub'
         }
-    ]
+    ];
 
     inquirer.prompt(engineerQuestions)
     
     .then((answer) => {
-
         const name = answer.engineerName;
         const id = answer.engineerId;
         const email = answer.engineerEmail;
         const github = answer.engineerGitHub;
 
-        const engineerMember = new Engineer(name, id, email, github);
+        const teamMember = new Engineer(name, id, email, github);
 
-        teamMembers.push(engineerMember);
+        teamMembers.push(teamMember);
 
         chooseTeamMember();
     });
@@ -162,21 +163,19 @@ function addIntern(){
             message: "What is the name of your intern's school ?",
             name: 'internSchool'
         }
-    ]
+    ];
 
     inquirer.prompt(internQuestions)
 
     .then((answer) => {
-
         const name = answer.internName;
         const id = answer.internId;
         const email = answer.internEmail
         const school = answer.internSchool;
 
-        const internMember = new Intern(name, id, email, school);
+        const teamMember = new Intern(name, id, email, school);
 
-        teamMembers.push(internMember);
-        console.log(teamMembers);
+        teamMembers.push(teamMember);
         chooseTeamMember();
     });
 
@@ -187,11 +186,106 @@ function addIntern(){
 
 
 function makeTeam(){
+
+    console.log(teamMembers)
     
     // create an array that stores the total HTML page
 
+    const totalHTML = [];
+
     // create a beginning HTML variable that stores basic beginning HTML layout 
         // push beginning HTML layout to the total HTML array 
+
+    const startHTML = `
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="../Team_Profile_Generator/style.css">
+    <title>Document</title>
+</head>
+<body id="body">
+
+<nav class="navbar sticky-top navbar-light" id="navBar">
+    <div class="container-fluid">
+        <a class="navbar-brand" id="sticky-top" href="#">Team Profile</a>
+    </div>
+</nav>
+
+
+
+    <div class="container">
+        <div class="row">`;
+
+        totalHTML.push(startHTML); // WORKS !!!!!!!!!!!!
+
+
+
+        teamMembers.forEach((member) => {
+
+            let memberHTML = `
+                <div class="col" id="card-body">
+                <h1>${member.name}</h1>
+                <h2>${member.role}</h2>
+                    <div id="info" style="border-style: solid;">
+                        <p> <strong>ID:</strong> ${member.id}</p>
+                        <strong>Email: </strong><a href="${member.email}"> ${member.email}</a>
+                    `
+
+            if (member.role === 'Manager') {
+                memberHTML += `
+             <p> <strong>Office Number:</strong> ${member.officeNum} </p>
+             </div>
+             </div>`
+            }
+
+            else if (member.role === 'Engineer') {
+                memberHTML += `
+             <strong>GitHub: </strong> <a href="https://github.com/${member.github}">${member.github}</a>
+             </div>
+             </div>`
+            }
+
+            else if (member.role === 'Intern') {
+                memberHTML += `
+             <p> <strong>School:</strong> ${member.school}</p>
+             </div>
+             </div>`
+            }
+
+            teamMembers += `
+                </div>
+            </div>`
+
+            totalHTML.push(memberHTML);
+
+            console.log(totalHTML)
+
+        })
+
+    const endHTML = `
+                </div>
+            </body>
+            </html>`
+
+    totalHTML.push(endHTML);
+
+  
+
+    fs.writeFile('teamProfile.html', totalHTML.join(''), (err) => 
+    err ? console.log(err) : console.log('success!'))
+
+
+    // fs.writeFile('log.txt', process.argv[2], (err) =>
+//   err ? console.error(err) : console.log('Success!')
+// );
+
+
+
 
     // create a for loop that loops through the length of teamMembers to add card bodys depending on roles
         // create a variable to store middle HTML layout 
@@ -214,8 +308,7 @@ function makeTeam(){
 }
 
 
-
-
+startQuestion();
 
 
 
