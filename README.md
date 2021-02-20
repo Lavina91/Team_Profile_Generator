@@ -41,6 +41,16 @@ npm run test
 
 ## Screenshots
 
+![Picture of questions ask for manager role](./assests/managerQuestions.png)
+
+![Picture of questions ask for engineer role](./assests/engineerQuestions.png)
+
+![Picture of questions ask for intern role](./assests/internQuestions.png)
+
+![Picture of generated team profile](./assests/teamProfile.png)
+
+![Picture of tests being ran and passed](./assests/jestTest.png)
+
 
 ## Videos
 
