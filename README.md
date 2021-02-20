@@ -11,8 +11,6 @@
 
 [Screenshots](#screenshots)
 
-[Videos](#videos)
-
 [Questions](#questions)
 
 
@@ -51,10 +49,6 @@ npm run test
 
 ![Picture of tests being ran and passed](./assests/jestTest.png)
 
-
-## Videos
-
-![Video of application generating a team profile](https://drive.google.com/file/d/1qYATtrpzQ0EDaxZjcgNeeKnPFWePl59m/view)
 
 ## Questions 
 
