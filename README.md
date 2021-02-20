@@ -54,6 +54,8 @@ npm run test
 
 ## Videos
 
+![Video of application generating a team profile](https://drive.google.com/file/d/1qYATtrpzQ0EDaxZjcgNeeKnPFWePl59m/view)
+
 ## Questions 
 
 If you have any questions about the repo, open an issue or contact me directly at mlavina91@gmail.com. 

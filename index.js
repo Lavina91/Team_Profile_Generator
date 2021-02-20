@@ -187,7 +187,7 @@ function addIntern(){
 
 function makeTeam(){
 
-    console.log(teamMembers)
+    
     
     // create an array that stores the total HTML page
 
@@ -263,7 +263,7 @@ function makeTeam(){
 
             totalHTML.push(memberHTML);
 
-            console.log(totalHTML)
+         
 
         })
 
@@ -283,7 +283,3 @@ function makeTeam(){
 
 
 startQuestion();
-
-
-
-
