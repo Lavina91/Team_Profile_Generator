@@ -1,17 +1,20 @@
+// calling in packages needed to make application function
 const inquirer = require('inquirer');
 const fs = require('fs');
 
+// linking my index.js to all my classes files
 const Manager = require('./classes/manager');
 const Engineer = require('./classes/engineer');
 const Intern = require('./classes/intern');
 const Employee = require('./classes/employee');
 
-
+// array to store all team members for team profile
 let teamMembers = [];
 
 
 
 function startQuestion() {
+    // variable to store all of the manager questions 
     const startQuestions = [
         {
             type: 'input',
@@ -35,21 +38,23 @@ function startQuestion() {
         }
     ]
 
-
+// prompting the user with the manager questions 
     inquirer.prompt(startQuestions)
-// inquirer prompt the startQuestions
-    .then((answer) => {
 
+    .then((answer) => {
+        // storing all the different inputs into variables 
         const name = answer.managerName;
         const id = answer.managerId;
         const email = answer.managerEmail;
         const officeNum = answer.managerOffice
      
-
+        // creating a new Manager object based off user input 
         const teamMember = new Manager (name, id, email, officeNum);
-
+        
+        // pushing the new Manager object to the teamMembers array
         teamMembers.push(teamMember)
 
+        // calling the chooseTeamMember function 
         chooseTeamMember();
 
 
@@ -57,12 +62,13 @@ function startQuestion() {
 
 
 
-}; // WORKS !!!!
+}; 
 
 
 
 function chooseTeamMember(){
 
+    // prompting the user to choose what role they want to add to the team profile
     inquirer.prompt([
         {
             type: 'list',
@@ -73,6 +79,8 @@ function chooseTeamMember(){
     ])
     .then((answer) => {
 
+        
+        // using a switch statement to call a function depending on user input
         switch(answer.roles) {
 
             case 'Engineer':
@@ -89,11 +97,13 @@ function chooseTeamMember(){
         }
     })
 
-} // WORKS !!!!!!!!
+} 
 
 
 
 function addEngineer(){
+
+    // variable to store all of the engineer questions
     const engineerQuestions = [
         {
             type: 'input',
@@ -125,23 +135,29 @@ function addEngineer(){
     inquirer.prompt(engineerQuestions)
     
     .then((answer) => {
+
+        // storing all of the user inputs into variables
         const name = answer.engineerName;
         const id = answer.engineerId;
         const email = answer.engineerEmail;
         const github = answer.engineerGitHub;
 
+        // creating a new Engineer object based off user input 
         const teamMember = new Engineer(name, id, email, github);
 
+        // pushing new Engineer object into teamMembers array 
         teamMembers.push(teamMember);
 
+        // calling the chooseTeamMember function
         chooseTeamMember();
     });
-}; // WORKS !!!!!!!!
+}; 
 
 
 
 
 function addIntern(){
+    // variable to store all of the intern questions 
     const internQuestions = [
         {
             type: 'input',
@@ -168,34 +184,33 @@ function addIntern(){
     inquirer.prompt(internQuestions)
 
     .then((answer) => {
+        // storing all the user inputs into variables 
         const name = answer.internName;
         const id = answer.internId;
         const email = answer.internEmail
         const school = answer.internSchool;
 
+        // creating a new Intern object based off user input 
         const teamMember = new Intern(name, id, email, school);
 
+        // pushing new Intern object to the teamMembers array 
         teamMembers.push(teamMember);
+
+        // calling the chooseTeamMember function 
         chooseTeamMember();
     });
 
 
-}; // WORKS !!!!!!!!!!!!!1
+}; 
 
 
 
 
 function makeTeam(){
-
-    
-    
-    // create an array that stores the total HTML page
-
+    // an array to store all of the team profile HTML content 
     const totalHTML = [];
 
-    // create a beginning HTML variable that stores basic beginning HTML layout 
-        // push beginning HTML layout to the total HTML array 
-
+    // variable that creates the beginning of the team profile HTML content
     const startHTML = `
     <!DOCTYPE html>
 <html lang="en">
@@ -221,12 +236,14 @@ function makeTeam(){
     <div class="container">
         <div class="row">`;
 
-        totalHTML.push(startHTML); // WORKS !!!!!!!!!!!!
+    // pushes the start HTML content to the totalHTML array
+        totalHTML.push(startHTML); 
 
 
-
+        // forEach function to loop through all of the teamMembers array
         teamMembers.forEach((member) => {
 
+            // all teamMembers will have this HTML content and will displayed according to their name, role, id and email 
             let memberHTML = `
                 <div class="col" id="card-body">
                 <h1>${member.name}</h1>
@@ -236,6 +253,7 @@ function makeTeam(){
                         <strong>Email: </strong><a href="${member.email}"> ${member.email}</a><br>
                     `
 
+            // if statement to check team member role, And assign additional HTML content according to their role
             if (member.role === 'Manager') {
                 memberHTML += `
              <p> <strong>Office Number:</strong> ${member.officeNum} </p>
@@ -257,29 +275,35 @@ function makeTeam(){
              </div>`
             }
 
-            teamMembers += `
+            // adding the last 2 closing divs to each team member 
+            memberHTML += `
                 </div>
             </div>`
 
+            // pushes each team member's HTML content to the totalHTML array
             totalHTML.push(memberHTML);
 
          
 
         })
 
+    // variable to store the ending of the HTML page     
     const endHTML = `
                 </div>
             </body>
             </html>`
-
+    
+    // pushes the ending HTML content to totalHTML array 
     totalHTML.push(endHTML);
 
   
-
+// creates a file named 'teamProfile.html' with the totalHTML array content joined together 
     fs.writeFile('teamProfile.html', totalHTML.join(''), (err) => 
+    // if there is an error , console log error 
+    // else console log success!
     err ? console.log(err) : console.log('success!'))
 
 }
 
-
+// starts off the application 
 startQuestion();
