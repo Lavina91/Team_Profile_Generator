@@ -233,7 +233,7 @@ function makeTeam(){
                 <h2>${member.role}</h2>
                     <div id="info" style="border-style: solid;">
                         <p> <strong>ID:</strong> ${member.id}</p>
-                        <strong>Email: </strong><a href="${member.email}"> ${member.email}</a>
+                        <strong>Email: </strong><a href="${member.email}"> ${member.email}</a><br>
                     `
 
             if (member.role === 'Manager') {
